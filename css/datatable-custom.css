@@ -1,0 +1,45 @@
+th {
+    text-align:center !important;
+  }
+  .thead-red{
+    background: #b52d46 !important;
+    color: white !important;
+  }
+
+  .thead-red .thead-search{
+  color: black !important;
+  }
+
+  .thead-red input{
+    width: 100%;
+  }
+
+  td{
+    background: #ffffff !important;
+    color: black !important;
+  }
+
+  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #edc2c2 !important;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+  }
+
+  .thead-red input {
+    color: black ;
+  }
+
+  .dataTables_filter {
+  display: none; 
+  }
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+.table > thead > tr > th {
+    vertical-align: middle;
+}

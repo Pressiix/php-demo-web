@@ -1,0 +1,50 @@
+body {
+  margin:0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+#myCarousel {
+  -webkit-animation: mymove 7s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 7s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+  50% {
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%);
+  }
+}
+
+/* Standard syntax */
+@keyframes mymove {
+  50% {
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%);
+  }
+
+}
+
+/* Style all input fields */
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+#img-profile {
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
