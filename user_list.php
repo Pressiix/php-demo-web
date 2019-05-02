@@ -68,7 +68,6 @@ select:required:invalid {
       else{
         event.preventDefault();
       }
-      
     }
 
 /***** Loader animation *****/
@@ -94,20 +93,12 @@ $(window).bind("load", function() {
 });
 </script>
 <?php 
- if(isset($_SESSION['Username']) && isset($_SESSION['Status']))
- { 
-  if($_SESSION['Status'] == 'ADMIN')
-  { 
+ if(isset($_SESSION['Username']) && isset($_SESSION['Status']) && $_SESSION['Status'] == 'ADMIN')
+ {  
     $result = UserData::findOnlyUser();
-    $user_name = [];
-    $user_id = [];
-    $user_index = 0;
-    foreach($result as $value)
-    {
-      $user_name[$user_index] = $value["Username"];
-      $user_id[$user_index] = $value["UserID"];
-      $user_index++;
-    }
+    $user_name =  array_column($result,'Username');
+    $user_id = array_column($result,'UserID');
+      
 ?>
       <body onload="myFunction()" style="margin:0;font-family: 'Comic Sans MS', cursive, sans-serif;">
     <!-- CREATE USER MODAL -->
@@ -129,9 +120,9 @@ $(window).bind("load", function() {
               </select>
               <?php
               if($user_name){
-                foreach($user_name as $name)
+                foreach($user_name as $username)
                 {
-                  echo '<input type="hidden" name="user_name[]" value="'. $name. '">';
+                  echo '<input type="hidden" name="user_name[]" value="'. $username. '">';
                 }
               }
               ?>
@@ -210,7 +201,6 @@ $(window).bind("load", function() {
           </div>
       </body>
 <?php 
-    }
   }
 else
 {

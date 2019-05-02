@@ -1,7 +1,8 @@
 <?php 
-  include("main.php"); 
-  include("assets/DataTableAsset.php");
-  include_once("helpers/ProductData.php");
+  include_once("main.php"); 
+  include_once("assets/DataTableAsset.php");
+  include_once("helpers/ActiveQuery.php");
+  use helpers\ActiveQuery;
   $tile = "Product List";
  ?>
  <title><?= $tile; ?></title>
@@ -62,7 +63,6 @@ function beforeDelete() {
       else{
         event.preventDefault();
       }
-      
     }
 
 /***** Loader animation *****/
@@ -88,12 +88,32 @@ $(window).bind("load", function() {
 });
 </script>
 <?php 
- if(isset($_SESSION['Username']) && isset($_SESSION['Status']))
+ if(isset($_SESSION['Username']) && isset($_SESSION['Status']) && $_SESSION['Status'] == 'ADMIN')
  { 
-  if($_SESSION['Status'] == 'ADMIN')
-  { 
-    $product = ProductData::findAll();
-    $productType = ProductData::findAllType();
+  $sql = "SELECT * FROM products p RIGHT JOIN product_type t ON p.type_id = t.type_id";
+  $result = ActiveQuery::queryAll($sql);
+  $product = [];
+  $productType = [];
+  foreach($result as $queryResult)
+  {
+     if(!isset($index))
+     {
+        $index = 0;
+     }
+     $productType[$index]['type_id'] = $queryResult['type_id'];
+     $productType[$index]['type_name'] = $queryResult['type_name'];
+     if(!empty($queryResult['productCode']))
+     {
+        $product[$index]['productCode'] = $queryResult['productCode'];
+        $product[$index]['productName'] = $queryResult['productName'];
+        $product[$index]['price'] = $queryResult['price'];
+        $product[$index]['qty'] = $queryResult['qty'];
+     }
+     $index++;
+     if (!is_array($queryResult) || empty($queryResult)) {
+        unset($index);
+    }
+  } 
 ?>
       <body onload="myFunction()" style="margin:0;font-family: 'Comic Sans MS', cursive, sans-serif;">
       <!-- CREATE PRODUCT MODAL -->
@@ -170,17 +190,16 @@ $(window).bind("load", function() {
           </div>
           </body>
 <?php 
+  }
+  else
+  {
+    function myException($exception) {
+      echo "<div class=\"container-fluid text-center\"><h2><b style=\"color:red;\">Exception:</b> " . $exception->getMessage()."</h2><div>";
     }
+    
+    set_exception_handler('myException');
+    
+    throw new Exception('Sorry!, You are not allow to access this page');
   }
-else
-{
-  function myException($exception) {
-    echo "<div class=\"container-fluid text-center\"><h2><b style=\"color:red;\">Exception:</b> " . $exception->getMessage()."</h2><div>";
-  }
-  
-  set_exception_handler('myException');
-  
-  throw new Exception('Sorry!, You are not allow to access this page');
-}
 ?>
 

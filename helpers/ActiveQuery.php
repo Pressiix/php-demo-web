@@ -13,9 +13,10 @@ class ActiveQuery
 
         if($query_result)       //If your query return a result
         {
-            if(mysqli_num_rows($query_result) > 0)         //If your query return a result as one dimensional array
+            $row = mysqli_num_rows($query_result);
+            if($row > 0)         //If your query return a result as one dimensional array
             {
-                for ($index=0;$index < mysqli_num_rows($query_result);$index++) {
+                for ($index=0;$index < $row;$index++) {
                     $result[$index] = $query_result->fetch_assoc();  //set result object for each rows and columns
                 }
             }
