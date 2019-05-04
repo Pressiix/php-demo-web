@@ -1,34 +1,7 @@
 <?php ob_start();
   session_start();
-
   include_once("config/connect.php");
-
-  class LoginValidation
-  {
-    public static function Validate($mysql ,$Username ,$Password)
-    {
-      $strSQL = "SELECT * FROM member WHERE Username = '".$Username."' 
-      and Password = '".$Password."'";
-      $objQuery = mysqli_query($mysql,$strSQL);
-      $objResult = mysqli_fetch_array($objQuery);
-        if(!$objResult)
-        {
-          $_SESSION["error"] = "Username or Password Incorrect!";
-          session_write_close();
-          header("location:index.php?message=Username or Password Incorrect!");
-        }
-        else
-        {
-          $_SESSION["UserID"] = $objResult["UserID"];
-          $_SESSION["Username"] = $objResult["Username"];
-          $_SESSION["Status"] = $objResult["Status"];
-    
-          session_write_close();
-          header("location:index.php");
-        }
-        mysqli_close($mysql);
-    }
-  }
+  include_once("login_validation.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login-modal.css">
     <link rel="stylesheet" href="css/social-bar.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <link href="css/all.css" rel="stylesheet">
     
     <style>
       .navbar-toggle{
@@ -67,7 +40,6 @@
     </style>
 </head>
 <body style="background: #efe0e0 !important;" >
-  
   <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container" style="background-color:#98464D;">

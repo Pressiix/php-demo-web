@@ -72,14 +72,14 @@ session_start();
                         <div class="productprice">
                         <div class="pricetext">Price : ฿<?= $product['price']; ?></div>
                             <div class="col-md-8" >
-                                <div class="input-group " style="padding-top:2px;">
+                                <div class="input-group " style="padding-top:1px;">
                                     <span class="input-group-btn" style="padding-top:6px;">
                                         <button type="button" class="btn btn-default" >
                                             <span class="glyphicon glyphicon-minus"></span>
                                         </button>
                                     </span>
                                     <span >
-                                        <input type="text"  class="form-control input-md" value="0" min="0" max="100" style="height:27px;">
+                                        <input type="text"  class="form-control input-md" value="0" min="0" max="100" style="height:34px;">
                                     </span>
                                     <span class="input-group-btn" style="padding-top:6px;">
                                         <button type="button" class="btn btn-default">

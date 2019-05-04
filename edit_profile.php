@@ -1,6 +1,6 @@
 <?php
 ob_start();
- include_once("main.php"); 
+ include_once("nav.php"); 
  include_once("config/connect.php");
  include("helpers/UserData.php");
  $tile = "Edit Profile"; 

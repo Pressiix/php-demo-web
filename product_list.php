@@ -83,7 +83,7 @@ $(window).bind("load", function() {
   if(typeof qd.message !== 'undefined')
   {
     alert(qd.message);
-    window.history.pushState({}, document.title, "/" + "PHP-demo/product_list.php");
+    window.history.pushState({}, document.title, "/" + "product_list.php");
   }
   
 });

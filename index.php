@@ -1,5 +1,5 @@
 <?php 
-    include_once("nav.php");
+    include_once("nav.php") ;
     $tile = "Home";
 ?>
 <title><?= $tile; ?></title>
@@ -18,7 +18,7 @@ $(window).bind("load", function() {
   if(typeof qd.message !== 'undefined')
   {
     alert(qd.message);
-    window.history.pushState({}, document.title, "/" + "PHP-demo/index.php");
+    window.history.pushState({}, document.title, "/" + "index.php");
   }
   
 });
@@ -29,6 +29,7 @@ $(window).bind("load", function() {
         <a href="#" class="google"><i class="fa fa-share-alt"></i></a>
     </div>
 <div class="content">
+    
     <div class="container-fluid " >
             <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border-radius: 15px 15px 15px 15px; overflow: hidden;">
                 <!-- Indicators -->

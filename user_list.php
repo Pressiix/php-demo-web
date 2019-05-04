@@ -87,7 +87,7 @@ $(window).bind("load", function() {
   if(typeof qd.message !== 'undefined')
   {
     alert(qd.message);
-    window.history.pushState({}, document.title, "/" + "PHP-demo/user_list.php");
+    window.history.pushState({}, document.title, "/" + "user_list.php");
   }
   
 });
