@@ -1,5 +1,5 @@
 <?php 
-  include_once("main.php"); 
+  include_once("nav.php"); 
   include_once("assets/DataTableAsset.php"); 
   include_once("helpers/UserData.php");
   include_once("create_user.php");
@@ -10,9 +10,9 @@
 <head>
     <meta charset="utf-8">
  <title><?= $tile; ?></title>
+ <link rel="stylesheet" href="css/datatable-custom.css">
+ <link rel="stylesheet" href="css/loader.css">
  <link rel="stylesheet" href="css/create-user-modal.css">
-<link rel="stylesheet" href="css/datatable-custom.css">
-<link rel="stylesheet" href="css/loader.css">
 <link rel="stylesheet" href="css/edit-user-modal.css">
 <style>
 select:required:invalid {

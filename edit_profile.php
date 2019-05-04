@@ -17,7 +17,7 @@ ob_start();
 	}
 	
 	$strSQL = "SELECT * FROM member WHERE UserID = '".$_SESSION['UserID']."' ";
-	$objQuery = mysqli_query($conn,$strSQL);
+	$objQuery = mysqli_query($mysql,$strSQL);
 	$objResult = mysqli_fetch_array($objQuery);
 ?>
 <title><?= $tile; ?></title>
@@ -88,5 +88,5 @@ if(isset($_POST['txtName'])){
     }
     header('Location: '.$_SERVER['REQUEST_URI']);
 }
-mysqli_close($conn);
+mysqli_close($mysql);
 ?>

@@ -1,12 +1,11 @@
 <?php 
-
-    include_once("main.php");
+    include_once("nav.php");
     $tile = "Home";
 ?>
 <title><?= $tile; ?></title>
 <script>
 $(document).ready(function(){
-    $('#product-content').load('product.php');
+    jQuery('#product-content').load('product.php');
 });
 
 function callCat(cat) {    
@@ -25,9 +24,9 @@ $(window).bind("load", function() {
 });
 </script>
     <div class="icon-bar" id="social-bar">
-        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a> 
-        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a> 
-        <a href="#" class="google"><i class="fa fa-google"></i></a>
+        <a href="#" class="facebook"><i class="fas fa-shopping-cart"></i></i></a> 
+        <a href="#" class="twitter"><i class="fa fa-star"></i></a> 
+        <a href="#" class="google"><i class="fa fa-share-alt"></i></a>
     </div>
 <div class="content">
     <div class="container-fluid " >

@@ -38,7 +38,7 @@ class UserData extends ActiveQuery
 
     public static function findOnlyUser()
     {
-        $sql = "call findMemberByStatus('USER')";
+        $sql = "SELECT * FROM member WHERE Status = \"USER\"";
 
         $result = UserData::queryAll($sql);
 

@@ -1,11 +1,17 @@
 <?php
 include_once("helpers/ActiveQuery.php");
 use helpers\ActiveQuery;
+
 class ProductData extends ActiveQuery
 {
     public static function Delete($id)
     {
         $sql = "DELETE FROM products WHERE productCode = ".$id;
+        ProductData::excute($sql);
+    }
+
+    public static function Update($sql)
+    {
         ProductData::excute($sql);
     }
 
