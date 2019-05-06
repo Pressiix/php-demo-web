@@ -1,38 +1,47 @@
 <?php 
-  include_once("nav.php"); 
-  include_once("assets/DataTableAsset.php");
-  include_once("helpers/ActiveQuery.php");
-  use helpers\ActiveQuery;
-  $tile = "Product List";
+    include_once("nav.php"); 
+    include_once("assets/DataTableAsset.php");
+    include_once("helpers/ProductData.php");
+    
+    $tile = "Product List";
  ?>
  <title><?= $tile; ?></title>
- <link rel="stylesheet" href="css/custom-datatable.css">
-<link rel="stylesheet" href="css/loader.css">
-<link rel="stylesheet" href="css/create-user-modal.css">
-<link rel="stylesheet" href="css/edit-user-modal.css">
-<style>
-option {
-  color: #7c7979;
-}
-</style>
+  <link rel="stylesheet" href="css/custom-datatable.css">
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/create-user-modal.css">
+  <link rel="stylesheet" href="css/edit-user-modal.css">
+
+  <style>
+     select > option {
+      color: #7c7979;
+      text-align-last:center;
+      padding-right: 45%;
+    } 
+    input[type="number"],input ,select {
+      height:40px;
+      text-align:center;
+      text-align-last:center;
+    }
+  </style>
+
 <script type="text/javascript">
 /** CUSTOMIZE DATATABLE ********/  
-$.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var min = parseInt( $('#min').val(), 10 );
-        var max = parseInt( $('#max').val(), 10 );
-        var age = parseFloat( data[3] ) || 0; // use data for the age column
- 
-        if ( ( isNaN( min ) && isNaN( max ) ) ||
-             ( isNaN( min ) && age <= max ) ||
-             ( min <= age   && isNaN( max ) ) ||
-             ( min <= age   && age <= max ) )
-        {
-            return true;
-        }
-        return false;
-    }
-);
+  $.fn.dataTable.ext.search.push(
+      function( settings, data, dataIndex ) {
+          var min = parseInt( $('#min').val(), 10 );
+          var max = parseInt( $('#max').val(), 10 );
+          var age = parseFloat( data[3] ) || 0; // use data for the age column
+  
+          if ( ( isNaN( min ) && isNaN( max ) ) ||
+              ( isNaN( min ) && age <= max ) ||
+              ( min <= age   && isNaN( max ) ) ||
+              ( min <= age   && age <= max ) )
+          {
+              return true;
+          }
+          return false;
+      }
+  );
 
     $(document).ready(function() {
 
@@ -81,46 +90,47 @@ $.fn.dataTable.ext.search.push(
 
     } );
 
-/** Question before delete user ********/
-function beforeDelete() {
-      var href = $(this).attr('href');
-      var r = confirm("Are you sure you want to delete a user?");
-      if(r == true)
-      {
-        window.location.href = document.getElementById("delteProduct").href;
-      }
-      else{
-        event.preventDefault();
-      }
+    /** Question before delete user ********/
+    function beforeDelete() {
+          var href = $(this).attr('href');
+          var r = confirm("Are you sure you want to delete a user?");
+          if(r == true)
+          {
+            window.location.href = document.getElementById("delteProduct").href;
+          }
+          else{
+            event.preventDefault();
+          }
     }
 
-/***** Loader animation *****/
-function myFunction() {
-  setTimeout(showPage, 1000);
-}
+    /***** Loader animation *****/
+    function myFunction() {
+      setTimeout(showPage, 1000);
+    }
 
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "inline-block";
-}
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "inline-block";
+    }
 
-//******* SHOW MESSAGE AFTER ACTION *******/
-$(window).bind("load", function() {
-  var qd = {};
-  if (location.search) location.search.substr(1).split("&").forEach(function(item) {var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)})
-  if(typeof qd.message !== 'undefined')
-  {
-    alert(qd.message);
-    window.history.pushState({}, document.title, "/" + "product_list.php");
-  }
-  
-});
+    //******* SHOW MESSAGE AFTER ACTION *******/
+    $(window).bind("load", function() {
+      var qd = {};
+      if (location.search) location.search.substr(1).split("&").forEach(function(item) {var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)})
+      if(typeof qd.message !== 'undefined')
+      {
+        alert(qd.message);
+        window.history.pushState({}, document.title, "/" + "product_list.php");
+      }
+      
+    });
 </script>
+
 <?php 
  if(isset($_SESSION['Username']) && isset($_SESSION['Status']) && $_SESSION['Status'] == 'ADMIN')
  { 
   $sql = "SELECT * FROM products p RIGHT JOIN product_type t ON p.type_id = t.type_id ORDER BY t.type_id ASC";
-  $result = ActiveQuery::queryAll($sql);
+  $result = ProductData::queryAll($sql);
   $product = [];
   $productType = [];
   foreach($result as $queryResult)
@@ -161,7 +171,7 @@ $(window).bind("load", function() {
               <input name="addProductName" type="text" placeholder="Name" id="addProductName" autocomplete="off" required>
               <input type="number" name="addPrice" placeholder="Price" id="addPrice" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" title="This should be a number with up to 2 decimal places." autocomplete="off" required>
               <input type="text" name="addQuantity" placeholder="Quantity" id="addQuantity" pattern="\d*" title="Quantity must be integer." autocomplete="off" required>
-              <br/><br/>
+              <br/>
               <select name="addType" id="addType" class="selectBox col-md-12" style="height:44px;font-family: 'Comic Sans MS', cursive, sans-serif;" required>
                   <option value="" hidden>Add Product Type</option>
                 <?php 
@@ -190,10 +200,10 @@ $(window).bind("load", function() {
 
           <div id="loader"></div>
           <div style="display:block;" id="myDiv" class="animate-bottom" style="display: none;text-align: center;">
-          <div class="container-fluid col-md-12 table-responsive">
-          <table class="table table-hover text-center" id="demo-table" >
+          <div class="container col-md-12">
+          <table class="table table-resonsive table-hover text-center" id="demo-table">
               <thead class="thead-red">
-                <tr >
+                <tr>
                   <th style="width:100px;">Code</th>
                   <th style="width:100px;">Name</th>
                   <th style="width:100px;">Price</th>
@@ -201,13 +211,13 @@ $(window).bind("load", function() {
                   <th style="width:100px;">Type</th>
                   <th style="width:130px;">Action</th>
                 </tr>
-                <tr >
-                  <th class="Search">Code</th>
-                  <th class="Search">Name</th>
-                  <th class="Search">Price</th>
-                  <th class="Search">Quantity</th>
-                  <th class="Search">Type</th>
-                  <th class="Search">Action</th>
+                <tr class="search-header">
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Type</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>

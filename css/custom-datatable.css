@@ -16,7 +16,7 @@
     background-color: #edc2c2 !important;
   }
 
-  table {
+  table{
     border-collapse: collapse;
     border-radius: 1em;
     overflow: hidden;
@@ -39,4 +39,8 @@
 .table > thead > tr > th {
     vertical-align: middle;
     text-align:center !important;
+}
+
+.search-header{
+  background-color: darkgrey;
 }

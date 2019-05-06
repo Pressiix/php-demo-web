@@ -16,21 +16,28 @@
 <link rel="stylesheet" href="css/edit-user-modal.css">
 
 <style>
-select:required:invalid {
-  color: #7c7979;
-}
+select > option {
+      color: #7c7979;
+      text-align-last:center;
+      padding-right: 45%;
+    } 
+    input[type="number"],input ,select {
+      height:40px;
+      text-align:center;
+      text-align-last:center;
+    }
 </style>
 </head>
 <script type="text/javascript">
 /** CUSTOMIZE DATATABLE ********/
     $(document).ready(function() {
-      $('#demo-table thead tr ').clone(true).appendTo( '#demo-table thead' );
+      //$('#demo-table thead tr ').clone(true).appendTo( '#demo-table thead' );
       $('#demo-table thead tr:eq(1) th').each( function (i) {
         
         if($(this).text() != "Action")
         {
           var title = $(this).text();
-          $(this).html( '<input type="text" placeholder="Search '+title+'"/>' );
+          $(this).html( '<input type="text" placeholder="Search '+title+'" autocomplete="off">' );
   
           $( 'input', this ).on( 'keyup change', function () {
               if ( table.column(i).search() !== this.value ) {
@@ -136,10 +143,18 @@ $(window).bind("load", function() {
 
           <div id="loader"></div>
           <div style="display:block;" id="myDiv" class="animate-bottom" style="display: none;text-align: center;">
-          <div class="container-fluid col-md-12 table-responsive">
+          <div class="container-fluid col-md-12">
           <table class="table table-hover text-center" id="demo-table" >
               <thead class="thead-red">
                 <tr class="d-flex">
+                  <th>ID</th>
+                  <th>Full Name</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+                <tr class="search-header">
                   <th>ID</th>
                   <th>Full Name</th>
                   <th>Username</th>
