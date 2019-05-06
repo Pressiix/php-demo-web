@@ -10,10 +10,11 @@
 <head>
     <meta charset="utf-8">
  <title><?= $tile; ?></title>
- <link rel="stylesheet" href="css/datatable-custom.css">
+ <link rel="stylesheet" href="css/custom-datatable.css">
  <link rel="stylesheet" href="css/loader.css">
  <link rel="stylesheet" href="css/create-user-modal.css">
 <link rel="stylesheet" href="css/edit-user-modal.css">
+
 <style>
 select:required:invalid {
   color: #7c7979;

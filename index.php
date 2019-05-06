@@ -80,7 +80,7 @@ $(window).bind("load", function() {
     <br/>
                 <div class="row">   <!----------------------------------ROW1----------------------------------------->
                     <div class="col-md-2"> <!--COLUMN1-->
-                        <div class="panel panel-body loginmodal-container text-center" style="background-color:#98464D;font-family: 'Comic Sans MS', cursive, sans-serif;">
+                        <div class="panel panel-body loginmodal-container text-center" style="background-color:#98464D;font-family: 'Comic Sans MS', cursive, sans-serif;border-radius: 7px;">
                             <?php
                                 if(isset($_SESSION['Username']))
                                 {

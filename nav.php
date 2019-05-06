@@ -8,9 +8,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="css/login-modal.css">
     <link rel="stylesheet" href="css/social-bar.css">
     <link rel="stylesheet" href="css/main.css">
@@ -29,7 +30,7 @@
       input
         {
           color:black;
-          border-radius: 18px;
+          border-radius: 0px;
           font-family: 'Comic Sans MS', cursive, sans-serif;
         }
 
@@ -39,7 +40,7 @@
       }
     </style>
 </head>
-<body style="background: #efe0e0 !important;" >
+<body style="background: #ffffff !important;" >
   <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container" style="background-color:#98464D;">
@@ -89,7 +90,7 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-            <li><a href="about.php"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+            <li><a href="about.php" id="about-menu"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
                 <?php 
                   if(isset($_SESSION['Username']))
                   {

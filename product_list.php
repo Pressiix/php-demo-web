@@ -6,7 +6,7 @@
   $tile = "Product List";
  ?>
  <title><?= $tile; ?></title>
-<link rel="stylesheet" href="css/datatable-custom.css">
+ <link rel="stylesheet" href="css/custom-datatable.css">
 <link rel="stylesheet" href="css/loader.css">
 <link rel="stylesheet" href="css/create-user-modal.css">
 <link rel="stylesheet" href="css/edit-user-modal.css">
@@ -16,24 +16,61 @@ option {
 }
 </style>
 <script type="text/javascript">
-/** CUSTOMIZE DATATABLE ********/
+/** CUSTOMIZE DATATABLE ********/  
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = parseInt( $('#min').val(), 10 );
+        var max = parseInt( $('#max').val(), 10 );
+        var age = parseFloat( data[3] ) || 0; // use data for the age column
+ 
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && age <= max ) ||
+             ( min <= age   && isNaN( max ) ) ||
+             ( min <= age   && age <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
     $(document).ready(function() {
-      $('#demo-table thead tr ').clone(true).appendTo( '#demo-table thead' );
-      $('#demo-table thead tr:eq(1) th').each( function (i) {
-        
+
+      var table = $('#demo-table').DataTable ( {
+          columnDefs: [
+              { orderable: false, "targets": 5 }
+          ],
+          bSortCellsTop: true,
+          fixedHeader: true,
+          bLengthChange : false,
+        } );
+
+      //$('#demo-table thead tr').clone().appendTo( '#demo-table thead');
+      $('#demo-table thead tr:eq(1) th').each( function (i) 
+      {
         if($(this).text() != "Action")
         {
           var title = $(this).text();
-          $(this).html( '<input type="text" placeholder="Search '+title+'"/>' );
-  
-          $( 'input', this ).on( 'keyup change', function () {
-              if ( table.column(i).search() !== this.value ) {
-                  table
-                      .column(i)
-                      .search( this.value )
-                      .draw();
-              }
-          } );
+          if(title == "Quantity")
+          {
+            $(this).html( '<input type="text" id="min" name="min" placeholder="min" style="width:80px;"> <input type="text" id="max" name="max" placeholder="max" style="width:80px;"> ' );
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').on( 'keyup change', function () {
+                table.draw();
+            } );
+          }
+          else
+          {
+            $(this).html( '<input type="text" placeholder="Search '+title+'"/>' );
+            $( 'input', this ).on( 'keyup change', function () {
+                if ( table.column(i).search() !== this.value ) {
+                    table
+                        .column(i)
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+          }
         }
         else
         {
@@ -42,16 +79,7 @@ option {
         }
       } );
 
-      var table = $('#demo-table').DataTable( {
-          columnDefs: [
-              { orderable: false, "targets": 5 }
-          ],
-          orderCellsTop: true,
-          fixedHeader: true,ordering:true,
-          bLengthChange : false,
-        } );
     } );
-
 
 /** Question before delete user ********/
 function beforeDelete() {
@@ -166,12 +194,20 @@ $(window).bind("load", function() {
           <table class="table table-hover text-center" id="demo-table" >
               <thead class="thead-red">
                 <tr >
-                  <th>Code</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Type</th>
-                  <th>Action</th>
+                  <th style="width:100px;">Code</th>
+                  <th style="width:100px;">Name</th>
+                  <th style="width:100px;">Price</th>
+                  <th style="width:120px;">Quantity</th>
+                  <th style="width:100px;">Type</th>
+                  <th style="width:130px;">Action</th>
+                </tr>
+                <tr >
+                  <th class="Search">Code</th>
+                  <th class="Search">Name</th>
+                  <th class="Search">Price</th>
+                  <th class="Search">Quantity</th>
+                  <th class="Search">Type</th>
+                  <th class="Search">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -182,12 +218,11 @@ $(window).bind("load", function() {
                     <tr >
                       <td><?= $val["productCode"]; ?></td>
                       <td><?= $val["productName"]; ?></td>
-                      <td><?= $val["price"]; ?> THB</td>
+                      <td><?= $val["price"]; ?></td>
                       <td><?= $val["qty"]; ?> pcs</td>
                       <td><?= $val["type_name"]; ?></td>
                       <td>
                       <a href="#edit-user-modal<?= $val["productCode"];?>" data-toggle="modal" class="btn btn-warning" role="button" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <br/><br/>
                         <a href="delete_product.php?productCode=<?= $val["productCode"]; ?>" id="delteProduct" class="btn btn-danger" role="button" onclick="beforeDelete()" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-trash"></span></a>
                       </td>
                     </tr>
