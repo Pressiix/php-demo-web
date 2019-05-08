@@ -2,7 +2,6 @@
   include_once("nav.php"); 
   include_once("assets/DataTableAsset.php"); 
   include_once("helpers/UserData.php");
-  include_once("create_user.php");
   $tile = "User List";
  ?>
 <!DOCTYPE html>
@@ -13,24 +12,19 @@
  <link rel="stylesheet" href="css/custom-datatable.css">
  <link rel="stylesheet" href="css/loader.css">
  <link rel="stylesheet" href="css/form-modal.css">
-
-<style>
-select > option {
-      color: #7c7979;
-      text-align-last:center;
-      padding-right: 45%;
-    } 
-    input[type="number"],input ,select {
-      height:40px;
-      text-align:center;
-      text-align-last:center;
-    }
-</style>
 </head>
 <script type="text/javascript">
 /** CUSTOMIZE DATATABLE ********/
     $(document).ready(function() {
-      //$('#demo-table thead tr ').clone(true).appendTo( '#demo-table thead' );
+      var table = $('#demo-table').DataTable( {
+          columnDefs: [
+              { orderable: false, "targets": 5 }
+          ],
+          orderCellsTop: true,
+          fixedHeader: true,ordering:true,
+          bLengthChange : false,
+        } );
+
       $('#demo-table thead tr:eq(1) th').each( function (i) {
         
         if($(this).text() != "Action")
@@ -53,51 +47,7 @@ select > option {
           $(this).html('<a href="user_list.php" data-toggle="modal" data-target="#create-user-modal" class="btn btn-success" role="button" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-plus"></span></a>');
         }
       } );
-
-      var table = $('#demo-table').DataTable( {
-          columnDefs: [
-              { orderable: false, "targets": 5 }
-          ],
-          orderCellsTop: true,
-          fixedHeader: true,ordering:true,
-          bLengthChange : false,
-        } );
     } );
-
-/** Question before delete user ********/
-    function beforeDelete() {
-      var href = $(this).attr('href');
-      var r = confirm("Are you sure you want to delete a user?");
-      if(r == true)
-      {
-        window.location.href = document.getElementById("delteItem").href;
-      }
-      else{
-        event.preventDefault();
-      }
-    }
-
-/***** Loader animation *****/
-function myFunction() {
-  setTimeout(showPage, 1000);
-}
-
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "inline-block";
-}
-
-//******* SHOW MESSAGE AFTER ACTION *******/
-$(window).bind("load", function() {
-  var qd = {};
-  if (location.search) location.search.substr(1).split("&").forEach(function(item) {var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)})
-  if(typeof qd.message !== 'undefined')
-  {
-    alert(qd.message);
-    window.history.pushState({}, document.title, "/" + "user_list.php");
-  }
-  
-});
 </script>
 <?php 
  if(isset($_SESSION['Username']) && isset($_SESSION['Status']) && $_SESSION['Status'] == 'ADMIN')
@@ -113,7 +63,7 @@ $(window).bind("load", function() {
     	  <div class="modal-dialog">
 				<div class="formmodal-container" style="background-color:#98464D;">
 					<h1 style="color:white;">Create User</h1><br>
-				  <form  method="post" action="" name="create-user-form" id="create-user-form">
+				  <form  method="post" action="create_user.php" name="create-user-form" id="create-user-form">
               <input name="createFirstname" type="text" placeholder="First name" id="createFirstname" autocomplete="off" required>
               <input name="createLastname" type="text" placeholder="Last name" id="createLastname" autocomplete="off" required>
               <input name="createUsername" type="text" placeholder="Username" id="createUsername" autocomplete="off" required>  
@@ -176,7 +126,7 @@ $(window).bind("load", function() {
                       <td class="col-md-2">
                         <a href="#edit-user-modal<?= $user["UserID"];?>" data-toggle="modal" class="btn btn-warning" role="button" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-pencil"></span></a>
                         &nbsp 
-                        <a href="delete_user.php?UserID=<?= $user["UserID"]; ?>" id="delteItem" class="btn btn-danger" role="button" onclick="beforeDelete()" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="delete_user.php?UserID=<?= $user["UserID"]; ?>" id="delete" class="btn btn-danger" role="button" onclick="beforeDelete()" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-trash"></span></a>
                       </td>
                     </tr>
           <!-- EDIT USER MODAL -->

@@ -9,40 +9,8 @@
   <link rel="stylesheet" href="css/custom-datatable.css">
   <link rel="stylesheet" href="css/loader.css">
   <link rel="stylesheet" href="css/form-modal.css">
-
-  <style>
-     select > option {
-      color: #7c7979;
-      text-align-last:center;
-      padding-right: 45%;
-    } 
-    input[type="number"],input ,select {
-      height:40px;
-      text-align:center;
-      text-align-last:center;
-    }
-    
-  </style>
-
 <script type="text/javascript">
 /** CUSTOMIZE DATATABLE ********/  
-  $.fn.dataTable.ext.search.push(
-      function( settings, data, dataIndex ) {
-          var min = parseInt( $('#min').val(), 10 );
-          var max = parseInt( $('#max').val(), 10 );
-          var age = parseFloat( data[3] ) || 0; // use data for the age column
-  
-          if ( ( isNaN( min ) && isNaN( max ) ) ||
-              ( isNaN( min ) && age <= max ) ||
-              ( min <= age   && isNaN( max ) ) ||
-              ( min <= age   && age <= max ) )
-          {
-              return true;
-          }
-          return false;
-      }
-  );
-
     $(document).ready(function() {
 
       var table = $('#demo-table').DataTable ( {
@@ -89,41 +57,6 @@
       } );
 
     } );
-
-    /** Question before delete user ********/
-    function beforeDelete() {
-          var href = $(this).attr('href');
-          var r = confirm("Are you sure you want to delete a user?");
-          if(r == true)
-          {
-            window.location.href = document.getElementById("delteProduct").href;
-          }
-          else{
-            event.preventDefault();
-          }
-    }
-
-    /***** Loader animation *****/
-    function myFunction() {
-      setTimeout(showPage, 1000);
-    }
-
-    function showPage() {
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("myDiv").style.display = "inline-block";
-    }
-
-    //******* SHOW MESSAGE AFTER ACTION *******/
-    $(window).bind("load", function() {
-      var qd = {};
-      if (location.search) location.search.substr(1).split("&").forEach(function(item) {var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)})
-      if(typeof qd.message !== 'undefined')
-      {
-        alert(qd.message);
-        window.history.pushState({}, document.title, "/" + "product_list.php");
-      }
-      
-    });
 </script>
 
 <?php 
@@ -233,7 +166,7 @@
                       <td><?= $val["type_name"]; ?></td>
                       <td>
                       <a href="#edit-user-modal<?= $val["productCode"];?>" data-toggle="modal" class="btn btn-warning" role="button" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="delete_product.php?productCode=<?= $val["productCode"]; ?>" id="delteProduct" class="btn btn-danger" role="button" onclick="beforeDelete()" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="delete_product.php?productCode=<?= $val["productCode"]; ?>" id="delete" class="btn btn-danger" role="button" onclick="beforeDelete()" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-trash"></span></a>
                       </td>
                     </tr>
 

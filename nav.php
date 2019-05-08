@@ -2,7 +2,6 @@
   session_start();
   include_once("config/connect.php");
   include_once("login_validation.php");
-  //include_once("assets/VueTH-AddressAsset.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +17,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    
+    <script>window.history.pushState({}, document.title,"<?= dirname($_SERVER['REQUEST_URI'], 1); ?>" + "/" + "<?= dirname($_SERVER['REQUEST_URI'], 0); ?>");</script>
     <style>
       .navbar-toggle{
         background-color:#98464D;
