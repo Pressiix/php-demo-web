@@ -2,6 +2,7 @@
   session_start();
   include_once("config/connect.php");
   include_once("login_validation.php");
+  //include_once("assets/VueTH-AddressAsset.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +28,12 @@
       .icon-bar {
         background-color:#ffff !important;
       }
-      input
-        {
-          color:black;
-          border-radius: 0px;
-          font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-
-      .selectBox
+      .selectBox ,  .loginmodal-container
       {
+        border-radius:18px;
+      }
+     
+      input[type=text], input[type=password] ,input[type="submit"] {
         border-radius:18px;
       }
     </style>
@@ -46,10 +44,10 @@
 				<div class="loginmodal-container" style="background-color:#98464D;">
 					<h1 style="color:white;">Login to Your Account</h1><br>
 				  <form name="form1" method="post" action="nav.php">
-              <input name="txtUsername" type="text" placeholder="Username" id="txtUsername" style="color:black;border-radius: 18px;" autocomplete="off" required>  
-              <input name="txtPassword" type="password" placeholder="Password" id="txtPassword" style="color:black;border-radius: 18px;" 
+              <input name="txtUsername" type="text" placeholder="Username" id="txtUsername" autocomplete="off" required>  
+              <input name="txtPassword" type="password" placeholder="Password" id="txtPassword" 
                       pattern="(?=.*\d)(?=.*[a-z]).{8,}" title="Password must contain number and letter, and at least 8 or more characters" required>
-              <input type="submit" name="Submit" value="Login" class="btn btn-success" style="border-radius: 18px;">
+              <input type="submit" name="Submit" value="Login" class="btn btn-success">
           </form>
           <?php 
             if(isset($_POST["txtUsername"]) && isset($_POST["txtPassword"]))
@@ -60,7 +58,7 @@
 				</div>
 			</div>
       </div>
-      <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
+      <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container" style="background-color:#98464D;">
 					<h1 style="color:white;">Sign Up</h1><br>
@@ -69,12 +67,10 @@
               <input name="signupLastname" type="text" placeholder="Last name" id="signupLastname" autocomplete="off" required>
               <input name="signupUsername" type="text" placeholder="Username" id="signupUsername" autocomplete="off" required>  
               <input name="signupPassword" type="password" placeholder="Password" id="signupPassword" autocomplete="off" 
-                    pattern="(?=.*\d)(?=.*[a-z]).{8,}" title="Password must contain number and letter, and at least 8 or more characters" required>
-                    
+                    pattern="(?=.*\d)(?=.*[a-z]).{8,}" title="Password must contain number and letter, and at least 8 or more characters" required>   
               <input name="signupStatus" type="hidden" id="signupStatus" value="USER" required>
               <input type="hidden" id="signup_user" name="signup_user" value="request">
-              <br/><br/>
-              <input type="submit" name="Submit" value="Sign Up" class="btn btn-success" style="border-radius: 18px;">
+              <input type="submit" name="Submit" value="Sign Up" class="btn btn-success">
           </form>
 				</div>
 			</div>

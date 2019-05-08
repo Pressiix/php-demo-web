@@ -8,8 +8,7 @@
  <title><?= $tile; ?></title>
   <link rel="stylesheet" href="css/custom-datatable.css">
   <link rel="stylesheet" href="css/loader.css">
-  <link rel="stylesheet" href="css/create-user-modal.css">
-  <link rel="stylesheet" href="css/edit-user-modal.css">
+  <link rel="stylesheet" href="css/form-modal.css">
 
   <style>
      select > option {
@@ -22,6 +21,7 @@
       text-align:center;
       text-align-last:center;
     }
+    
   </style>
 
 <script type="text/javascript">
@@ -165,7 +165,7 @@
       <!-- CREATE PRODUCT MODAL -->
       <div class="modal fade" id="create-product-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
     	  <div class="modal-dialog">
-				<div class="usermodal-container" style="background-color:#98464D;">
+				<div class="formmodal-container" style="background-color:#98464D;">
 					<h1 style="color:white;">Add Product</h1><br>
 				  <form  method="post" action="create_product.php">
               <input name="addProductName" type="text" placeholder="Name" id="addProductName" autocomplete="off" required>
@@ -239,7 +239,7 @@
 
                     <div class="modal fade text-left" id="edit-user-modal<?= $val["productCode"];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
                       <div class="modal-dialog">
-                      <div class="editusermodal-container" style="background-color:#98464D;">
+                      <div class="formmodal-container" style="background-color:#98464D;">
                         <h1 style="color:white;">Edit product info</h1>
                         <form  method="post" action="edit_product.php">
                            <h5 style="color:white;">Name</h5>

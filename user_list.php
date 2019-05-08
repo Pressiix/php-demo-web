@@ -12,8 +12,7 @@
  <title><?= $tile; ?></title>
  <link rel="stylesheet" href="css/custom-datatable.css">
  <link rel="stylesheet" href="css/loader.css">
- <link rel="stylesheet" href="css/create-user-modal.css">
-<link rel="stylesheet" href="css/edit-user-modal.css">
+ <link rel="stylesheet" href="css/form-modal.css">
 
 <style>
 select > option {
@@ -112,7 +111,7 @@ $(window).bind("load", function() {
     <!-- CREATE USER MODAL -->
       <div class="modal fade" id="create-user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
     	  <div class="modal-dialog">
-				<div class="usermodal-container" style="background-color:#98464D;">
+				<div class="formmodal-container" style="background-color:#98464D;">
 					<h1 style="color:white;">Create User</h1><br>
 				  <form  method="post" action="" name="create-user-form" id="create-user-form">
               <input name="createFirstname" type="text" placeholder="First name" id="createFirstname" autocomplete="off" required>
@@ -183,7 +182,7 @@ $(window).bind("load", function() {
           <!-- EDIT USER MODAL -->
               <div class="modal fade text-left" id="edit-user-modal<?= $user["UserID"];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
                       <div class="modal-dialog">
-                      <div class="editusermodal-container" style="background-color:#98464D;">
+                      <div class="formmodal-container" style="background-color:#98464D;">
                         <h1 style="color:white;">Edit user</h1>
                         <form  method="post" action="edit_user.php">
                            <h5 style="color:white;">Name</h5>

@@ -16,7 +16,8 @@ class UserData extends ActiveQuery
 
     public static function Create($username ,$password ,$name ,$status)
     {
-        $sql = "INSERT INTO member VALUES (NULL, '".$username."', '".$password."', '".$name."', '".$status."')";
+        $sql = "INSERT INTO member VALUES (NULL, '".$username."', '".$password."', '".$name."', '".$status."'
+        , '', '', '', '', '')";
         UserData::excute($sql);
     }
 

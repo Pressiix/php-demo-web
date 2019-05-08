@@ -1,8 +1,7 @@
-RewriteEngine on
-# If a directory or a file exists, use it directly
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
-# Otherwise forward it to index.php
-RewriteRule . index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule (.*) $1.php [L]
 
 php_value output_buffering 1
