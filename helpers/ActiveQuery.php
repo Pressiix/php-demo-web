@@ -1,6 +1,6 @@
 <?php
 namespace helpers;
-include_once($_SERVER['DOCUMENT_ROOT']."/PHP-demo/config/connect.php");
+include_once($_SERVER['DOCUMENT_ROOT'].''.dirname($_SERVER['REQUEST_URI'], 1)."/config/connect.php");
 
 class ActiveQuery
 {
@@ -16,7 +16,8 @@ class ActiveQuery
             $row = mysqli_num_rows($query_result);
             if($row > 0)         //If your query return a result as one dimensional array
             {
-                for ($index=0;$index < $row;$index++) {
+                for ($index=0;$index < $row;$index++) 
+                {
                     $result[$index] = $query_result->fetch_assoc();  //set result object for each rows and columns
                 }
             }
