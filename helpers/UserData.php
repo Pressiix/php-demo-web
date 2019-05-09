@@ -1,6 +1,7 @@
 <?php
 include_once("helpers/ActiveQuery.php");
 use helpers\ActiveQuery;
+
 class UserData extends ActiveQuery
 {
     public static function Update($sql)
