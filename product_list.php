@@ -2,7 +2,6 @@
     include_once("nav.php"); 
     include_once("assets/DataTableAsset.php");
     include_once("helpers/ProductData.php");
-    
     $tile = "Product List";
  ?>
  <title><?= $tile; ?></title>

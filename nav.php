@@ -1,4 +1,5 @@
-<?php ob_start();
+<?php 
+  ob_start();
   session_start();
   include_once("config/connect.php");
   include_once("login_validation.php");
