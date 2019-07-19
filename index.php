@@ -1,15 +1,15 @@
 <?php 
-    include_once("nav.php") ;
+    require_once("nav.php") ;
     $tile = "Home";
 ?>
 <title><?= $tile; ?></title>
 <script>
 $(document).ready(function(){
-    jQuery('#product-content').load('product.php');
+    $('#product-content').load('product.php');
 });
 
 function callCat(cat) {    
-    jQuery('#product-content').load("product.php?typeId="+cat);          
+    $('#product-content').load("product.php?typeId="+cat);          
 }
 
 $(window).bind("load", function() {
@@ -18,7 +18,7 @@ $(window).bind("load", function() {
   if(typeof qd.message !== 'undefined')
   {
     alert(qd.message);
-    window.history.pushState({}, document.title, "/" + "index.php");
+    //window.history.pushState({}, document.title, "/" + "index.php");
   }
   
 });

@@ -1,5 +1,5 @@
 <?php
-include_once("helpers/ActiveQuery.php");
+require_once("helpers/ActiveQuery.php");
 use helpers\ActiveQuery;
 class LoginValidation
 {

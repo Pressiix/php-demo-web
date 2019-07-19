@@ -1,5 +1,5 @@
 <?php
-include("helpers/ProductData.php");
+require_once("helpers/ProductData.php");
 
 if(isset($_GET['productCode']))
 {

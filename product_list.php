@@ -8,17 +8,63 @@
   <link rel="stylesheet" href="css/custom-datatable.css">
   <link rel="stylesheet" href="css/loader.css">
   <link rel="stylesheet" href="css/form-modal.css">
-<script type="text/javascript">
+  <style>
+    .dataTables_wrapper .dt-buttons {
+      float:right;
+      height:50px;
+    }
+  </style>
+  <script type="text/javascript">
 /** CUSTOMIZE DATATABLE ********/  
     $(document).ready(function() {
 
       var table = $('#demo-table').DataTable ( {
           columnDefs: [
-              { orderable: false, "targets": 5 }
+              { orderable: false, "targets": 4 }
           ],
           bSortCellsTop: true,
           fixedHeader: true,
-          bLengthChange : false,
+          bLengthChange : true,
+          dom: 'Bfrtip',
+          buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 4, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                  columns: [ 0, 1, 2, 3 ]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                }
+            },
+            'colvis',
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                },
+                title: 'Product Data',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:350; left:220;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            } 
+        ]
         } );
 
       //$('#demo-table thead tr').clone().appendTo( '#demo-table thead');
@@ -94,6 +140,10 @@
   
 ?>
       <body onload="myFunction()" style="margin:0;font-family: 'Comic Sans MS', cursive, sans-serif;">
+      <div class="container col-md-12 text-left">
+          <h2>&nbsp<b>Product Data</b></h2>
+          <h5>&nbsp<?= date('l j F Y'); ?></h5>
+      </div>
       <!-- CREATE PRODUCT MODAL -->
       <div class="modal fade" id="create-product-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
     	  <div class="modal-dialog">
@@ -131,7 +181,7 @@
       </div>
 
           <div id="loader"></div>
-          <div style="display:block;" id="myDiv" class="animate-bottom" style="display: none;text-align: center;">
+          <div style="display:block;" id="myDiv" class="animate-bottom">
           <div class="container col-md-12">
           <table class="table table-resonsive table-hover text-center" id="demo-table">
               <thead class="thead-red">
@@ -140,7 +190,7 @@
                   <th style="width:100px;">Name</th>
                   <th style="width:100px;">Price</th>
                   <th style="width:120px;">Quantity</th>
-                  <th style="width:100px;">Type</th>
+                  <!--<th style="width:100px;">Type</th>-->
                   <th style="width:130px;">Action</th>
                 </tr>
                 <tr class="search-header">
@@ -148,7 +198,7 @@
                   <th>Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
-                  <th>Type</th>
+                  <!--<th>Type</th>-->
                   <th>Action</th>
                 </tr>
               </thead>
@@ -162,7 +212,7 @@
                       <td><?= $val["productName"]; ?></td>
                       <td><?= $val["price"]; ?></td>
                       <td><?= $val["qty"]; ?> pcs</td>
-                      <td><?= $val["type_name"]; ?></td>
+                      <!--<td> //$val["type_name"]; ?></td>-->
                       <td>
                       <a href="#edit-user-modal<?= $val["productCode"];?>" data-toggle="modal" class="btn btn-warning" role="button" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href="delete_product.php?productCode=<?= $val["productCode"]; ?>" id="delete" class="btn btn-danger" role="button" onclick="beforeDelete()" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-trash"></span></a>

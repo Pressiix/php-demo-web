@@ -1,5 +1,5 @@
 <?php 
-    include_once("nav.php"); 
+    require_once("nav.php"); 
     $tile = "About";
 ?>
 <title><?= $tile; ?></title>

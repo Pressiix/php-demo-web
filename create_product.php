@@ -1,5 +1,5 @@
 <?php 
-include_once("helpers/ProductData.php");
+require_once("helpers/ProductData.php");
 
 $check_existing_productName = false;
     if(isset($_POST['product_name'])){

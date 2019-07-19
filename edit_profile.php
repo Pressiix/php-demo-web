@@ -1,9 +1,9 @@
 <?php
 ob_start();
- include_once("nav.php"); 
- include_once("config/connect.php");
- include("helpers/UserData.php");
- include("assets/VueTH-AddressAsset.php");
+ require_once("nav.php"); 
+ require_once("config/connect.php");
+ require_once("helpers/UserData.php");
+ require_once("assets/VueTH-AddressAsset.php");
  $tile = "Edit Profile"; 
 	
 	$strSQL = "SELECT * FROM member WHERE UserID = '".$_SESSION['UserID']."' ";
@@ -56,7 +56,7 @@ input[type="text"],input[type="password"]{
                   <td>&nbsp;Name</td>
                   <td><input name="txtName" type="text" id="txtName" value="<?php echo $objResult["Name"];?>" style="height:40px;"></td>
                 </tr>
-                <tr style="background-color:#98464D;color:#fff;height:40px;"><td class="text-center" colspan="2">&nbsp;Shipping Address</td></tr>
+                <tr style="background-color:#98464D;color:#fff;height:40px;"><td class="text-center" colspan="2">&nbsp;Address</td></tr>
                 <tr>
                      <td rowspan="8" width="290px">
                      <table>
@@ -70,7 +70,7 @@ input[type="text"],input[type="password"]{
                       <table>
                         <tr>
                           <td>
-                            <div id="app">
+                            <div id="address">
                                 <addressinput-subdistrict name="subdistrict" placeholder="<?php echo $objResult["Addr_subdistrict"];?>" style="width:300px;" v-model="subdistrict"></addressinput-subdistrict>
                                 <input type="hidden" name="hidden_subdistrict" value="<?php echo $objResult["Addr_subdistrict"];?>">
                                 <addressinput-district name="district" placeholder="<?php echo $objResult["Addr_district"];?>" v-model="district"></addressinput-district>
@@ -110,7 +110,7 @@ input[type="text"],input[type="password"]{
     });
 
     new Vue({
-      el: '#app',
+      el: '#address',
 			data: {
 				subdistrict: '',
 				district: '',

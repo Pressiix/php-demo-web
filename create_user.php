@@ -1,5 +1,5 @@
 <?php 
-include_once("helpers/UserData.php");
+require_once("helpers/UserData.php");
 
 $check_existing_username = false;
 

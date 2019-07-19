@@ -12,22 +12,81 @@
  <link rel="stylesheet" href="css/custom-datatable.css">
  <link rel="stylesheet" href="css/loader.css">
  <link rel="stylesheet" href="css/form-modal.css">
+ <style>
+    .dataTables_wrapper .dt-buttons {
+      float:right;
+      height:50px;
+    }
+    td:nth-child(2) {
+  width: 100px;
+  max-width: 100px;
+}
+  </style>
 </head>
 <script type="text/javascript">
 /** CUSTOMIZE DATATABLE ********/
     $(document).ready(function() {
       var table = $('#demo-table').DataTable( {
           columnDefs: [
-              { orderable: false, "targets": 5 }
+              { orderable: false, "targets": 4 }
           ],
           orderCellsTop: true,
           fixedHeader: true,ordering:true,
-          bLengthChange : false,
+          bLengthChange : true,
+          dom: 'Bfrtip',
+          buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 4, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                  columns: [ 0, 1, 2, 3 ]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                },
+              //-------------------------- 
+              customize : function(doc) {
+                doc.styles['td:nth-child(2)'] = { 
+                  width: '100px',
+                  'max-width': '100px'
+                }
+              }
+            },
+            'colvis',
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                },
+                title: 'User Data',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:350; left:220;" />'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            } 
+        ]
         } );
 
       $('#demo-table thead tr:eq(1) th').each( function (i) {
         
-        if($(this).text() != "Action")
+        if($(this).text() != "Action" || $(this).text() != "Role")
         {
           var title = $(this).text();
           $(this).html( '<input type="text" placeholder="Search '+title+'" autocomplete="off">' );
@@ -58,6 +117,10 @@
       
 ?>
       <body onload="myFunction()" style="margin:0;font-family: 'Comic Sans MS', cursive, sans-serif;">
+      <div class="container col-md-12 text-left">
+          <h2>&nbsp<b>User Data</b></h2>
+          <h5>&nbsp<?= date('l j F Y'); ?></h5>
+      </div>
     <!-- CREATE USER MODAL -->
       <div class="modal fade" id="create-user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-family: 'Comic Sans MS', cursive, sans-serif;display: none;">
     	  <div class="modal-dialog">
@@ -99,16 +162,14 @@
                   <th>ID</th>
                   <th>Full Name</th>
                   <th>Username</th>
-                  <th>Password</th>
-                  <th>Status</th>
+                  <th>Role</th>
                   <th>Action</th>
                 </tr>
                 <tr class="search-header">
                   <th>ID</th>
                   <th>Full Name</th>
                   <th>Username</th>
-                  <th>Password</th>
-                  <th>Status</th>
+                  <th>Role</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -121,7 +182,6 @@
                       <td class="col-md-1"><?= $user["UserID"]; ?></td>
                       <td class="col-md-2"><?= $user["Name"]; ?></td>
                       <td class="col-md-2"><?= $user["Username"]; ?></td>
-                      <td class="col-md-2"><?= hash('ripemd160',$user["Password"]); ?></td>
                       <td class="col-md-2"><?= $user["Status"]; ?></td>
                       <td class="col-md-2">
                         <a href="#edit-user-modal<?= $user["UserID"];?>" data-toggle="modal" class="btn btn-warning" role="button" style="border-radius: 18px;width:70px;"><span class="glyphicon glyphicon-pencil"></span></a>

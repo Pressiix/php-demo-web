@@ -1,5 +1,5 @@
 <?php
-include("helpers/UserData.php");
+require_once("helpers/UserData.php");
 session_start();
 
 if($_SESSION['Status'] == 'ADMIN')

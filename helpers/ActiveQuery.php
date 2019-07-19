@@ -1,6 +1,6 @@
 <?php
 namespace helpers;
-include_once($_SERVER['DOCUMENT_ROOT'].''.dirname($_SERVER['REQUEST_URI'], 1)."/config/connect.php");
+require_once($_SERVER['DOCUMENT_ROOT'].''.dirname($_SERVER['REQUEST_URI'], 1)."/config/connect.php");
 
 class ActiveQuery
 {

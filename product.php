@@ -1,6 +1,6 @@
 <?php 
 session_start();
-    include_once("helpers/ActiveQuery.php");
+require_once("helpers/ActiveQuery.php");
 ?>
 <style type="text/css">
 .productbox {
