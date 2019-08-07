@@ -18,7 +18,7 @@ $(window).bind("load", function() {
   if(typeof qd.message !== 'undefined')
   {
     alert(qd.message);
-    //window.history.pushState({}, document.title, "/" + "index.php");
+    window.history.pushState({}, document.title, "/" + "index.php");
   }
   
 });

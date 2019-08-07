@@ -86,7 +86,7 @@
 
       $('#demo-table thead tr:eq(1) th').each( function (i) {
         
-        if($(this).text() != "Action" || $(this).text() != "Role")
+        if($(this).text() != "Action" )
         {
           var title = $(this).text();
           $(this).html( '<input type="text" placeholder="Search '+title+'" autocomplete="off">' );
